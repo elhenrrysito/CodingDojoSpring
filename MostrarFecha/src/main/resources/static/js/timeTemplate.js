@@ -1,0 +1,1 @@
+alert("Esta es una plantilla de hora");
