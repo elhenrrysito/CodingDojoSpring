@@ -19,7 +19,6 @@ public class Song {
     @Size(min = 2, max = 20)
     private String artist;
 
-    @Size(min = 1, max = 3)
     private int rating;
 
     @Column(updatable = false)
@@ -28,6 +27,9 @@ public class Song {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date updatedAt;
+
+    public Song() {
+    }
 
     public Song(Long id, String title, String artist, int rating) {
         this.id = id;

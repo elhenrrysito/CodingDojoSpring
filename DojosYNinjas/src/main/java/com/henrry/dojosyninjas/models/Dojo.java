@@ -1,0 +1,2 @@
+package com.henrry.dojosyninjas.models;public class Dojo {
+}

@@ -10,10 +10,12 @@ import java.util.List;
 public interface SongRepository extends CrudRepository<Song, Long> {
     // Este método recupera todos las canciones de la base de datos
     List<Song> findAll();
+    // Este método recupera el top 10 de canciones por rating
+    List<Song> findTop10ByOrderByRatingDesc();
     //Este método encuentra una cancion por su nombre
     List<Song> findByTitleContaining(String search);
     //Este método encuentra una cancion por su artista
-    List<Song> finByArtistContaining(String search);
+    List<Song> findByArtistContaining(String search);
     //Este método borra una canción que empieza con un titulo específico
     Long deleteByTitleStartingWith(String search);
 
