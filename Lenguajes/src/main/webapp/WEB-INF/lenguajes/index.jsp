@@ -44,8 +44,8 @@
     <form:form cssClass="row g-3" action="/lenguajes" method="post" modelAttribute="lenguaje">
         <div class="col-md-6">
             <form:label cssClass="form-label" path="name">Name</form:label>
-            <form:errors path="name"/>
             <form:input cssClass="form-control" path="name"/>
+            <form:errors path="name"/>
         </div>
 
         <div class="col-md-6">

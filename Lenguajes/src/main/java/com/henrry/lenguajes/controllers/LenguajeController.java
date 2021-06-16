@@ -29,6 +29,7 @@ public class LenguajeController {
         return ("/lenguajes/index.jsp");
     }
 
+    // create lenguaje
     @RequestMapping(value="", method = RequestMethod.POST)
     public String create(@Valid @ModelAttribute("lenguaje") Lenguaje lenguaje, BindingResult result) {
         if(result.hasErrors()) {
@@ -38,8 +39,6 @@ public class LenguajeController {
             return "redirect:/lenguajes";
         }
     }
-
-
 
     @RequestMapping(value="/{id}", method = RequestMethod.GET)
     public String showLenguaje(@PathVariable("id") Long id, Model model) {

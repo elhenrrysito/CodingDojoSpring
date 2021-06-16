@@ -17,23 +17,11 @@
 <body>
     <div class="container text-center">
         <h1>New Dojo</h1>
-        <form:form action="" method="POST" >
+        <form:form action="" method="POST" modelAttribute="dojo">
             <div class="mb-3">
-                <form:label cssClass="form-label" path="person">Person</form:label>
-                <form:select cssClass="form-select" path="person">
-                    <option selected>Select person</option>
-                    <c:forEach items="${persons}" var="person">
-                        <form:option value="${person.id}">${person.firstName} ${person.lastName}</form:option>
-                    </c:forEach>
-                </form:select>
-            </div>
-            <div class="mb-3">
-                <form:label cssClass="form-label" path="state">State</form:label>
-                <form:input type="text" class="form-control" path="state"/>
-            </div>
-            <div class="mb-3">
-                <form:label cssClass="form-label" path="expirationDate">Expiration Date</form:label>
-                <form:input type="date" cssClass="form-control" path="expirationDate"/>
+                <form:label cssClass="form-label" path="name">Name</form:label>
+                <form:input type="text" class="form-control" path="name"/>
+                <form:errors path="name"/>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form:form>

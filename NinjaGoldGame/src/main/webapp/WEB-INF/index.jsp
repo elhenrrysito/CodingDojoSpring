@@ -1,4 +1,4 @@
-<%@ page import="java.util.ArrayList" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: henrr
   Date: 06/06/2021
@@ -16,75 +16,42 @@
 </head>
 <body>
     <div class="container">
-        <form action="/reset" method="POST">
-            <h2 class="mt-3">Your Gold: <input class="col-1"type="number" name="gold" value="<c:out value="${gold}"/>" disabled> </h2>
-            <input class="btn btn-primary" type="submit" value="Reset">
-        </form>
+        <h2 class="mt-3">Your Gold: <input class="col-1"type="number" name="gold" disabled> </h2>
+        <form action="/gold" method="POST">
             <div class="row text-center mb-5 mt-5">.
-
                 <div class="col border p-3">
-                    <form action="/gold" method="POST">
-                        <h3>Farm</h3>
-                        <p>Gana 10-20 de oro</p>
-                        <input type="hidden" name="option" value="farm">
-                        <button class="btn btn-primary">Find Gold!</button>
-                    </form>
+                    <h3>Farm</h3>
+                    <p>Gana 10-20 de oro</p>
+                    <input class="btn btn-primary" type="text" name="option" value="farm">
                 </div>
-
                 <div class="col border p-3">
-                     <form action="/gold" method="POST">
-                         <h3>Cave</h3>
-                         <p>Gana 5-10 de oro</p>
+                    <h3>Cave</h3>
+                    <p>Gana 5-10 de oro</p>
 
-                          <input type="hidden" name="option" value="cave">
-                         <button class="btn btn-primary">Find Gold!</button>
-                     </form>
+                    <input type="text" name="option" value="">
+
+                    <button class="btn btn-primary">Find Gold!</button>
+
                 </div>
-
-
                 <div class="col border p-3">
-                      <form action="/gold" method="POST">
-                            <h3>House</h3>
-                            <p>Gana 2-5 de oro</p>
-                          <input type="hidden" name="option" value="house">
-                            <button class="btn btn-primary">Find Gold!</button>
-                      </form>
-               </div>
+                    <h3>House</h3>
+                    <p>Gana 2-5 de oro</p>
+                    <button class="btn btn-primary">Find Gold!</button>
 
-               <div class="col border p-3">
-                     <form action="/gold" method="POST">
-                         <h3>Casino</h3>
-                          <p>Gana o pierde 0-50 de oro</p>
-                         <input type="hidden" name="option" value="casino">
-                         <button class="btn btn-primary">Find Gold!</button>
-                     </form>
-               </div>
-
+                </div>
                 <div class="col border p-3">
-                    <form action="/gold" method="POST">
-                        <h3>Spa</h3>
-                        <p>Gaste 5-20 de oro</p>
-                        <input type="hidden" name="option" value="spa">
-                        <button class="btn btn-primary">Go Spa!</button>
-                    </form>
+                    <h3>Casino</h3>
+                    <p>Gana 0-50 de oro</p>
+                    <button class="btn btn-primary">Find Gold!</button>
                 </div>
+            </div>
 
-              <h3 class="mt-3">Activities</h3>
-                <div>
-                    <textarea class="col-12 mt-2" name="money_control" id="" cols="30" rows="10" disabled>
-                        <%
-                            if(session.getAttribute("activities") != null) {
-                                ArrayList<String> activities = (ArrayList<String>) session.getAttribute("activities");
-                                out.println("");
-                                for(String actividad : activities) {
-                                    out.println(actividad);
-                                }
-                            }
-                        %>
-                    </textarea>
-                </div>
+            <h3>Activities</h3>
+            <div>
+              <textarea class="col-12 mt-2" name="money_control" id="" cols="30" rows="10" disabled></textarea>
+            </div>
+        </form>
 
-             </div>
     </div>
 </body>
 
