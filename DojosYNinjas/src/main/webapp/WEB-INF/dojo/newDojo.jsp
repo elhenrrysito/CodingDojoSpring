@@ -15,9 +15,10 @@
     <title>New Dojo</title>
 </head>
 <body>
-    <div class="container text-center">
-        <h1>New Dojo</h1>
+    <div class="container text-center d-flex justify-content-center">
+
         <form:form action="" method="POST" modelAttribute="dojo">
+            <h1>New Dojo</h1>
             <div class="mb-3">
                 <form:label cssClass="form-label" path="name">Name</form:label>
                 <form:input type="text" class="form-control" path="name"/>

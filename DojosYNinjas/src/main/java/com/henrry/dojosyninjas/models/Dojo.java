@@ -1,6 +1,7 @@
 package com.henrry.dojosyninjas.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
@@ -10,6 +11,7 @@ public class Dojo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Size(min=1, max=100)
     private String name;
     @Column(updatable=false)
     private Date createdAt;

@@ -10,26 +10,30 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <title>Dojos</title>
 </head>
 <body>
-    <div class="container text-center">
-        <h1>Person Information</h1>
-        <h2><c:out value="${dojo.}"/> <c:out value="${person.lastName}"/></h2>
-        <table class="table">
+<div class="container mt-3">
+    <h1 class="text-center"><c:out value="${dojo.name} Location Ninjas"/></h1>
+    <table class="table">
+        <thead class="table-dark">
+        <tr>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Age</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${dojo.ninjas}" var="ninja">
             <tr>
-                <td>License Number:</td>
-                <td><c:out value="${person.license.number}"/></td>
+                <td><c:out value="${ninja.firstName}"/></td>
+                <td><c:out value="${ninja.lastName}"/></td>
+                <td><c:out value="${ninja.age}"/></td>
             </tr>
-            <tr>
-                <td>State:</td>
-                <td><c:out value="${person.license.state}"/></td>
-            </tr>
-            <tr>
-                <td>Expiration Date:</td>
-                <td><c:out value="${person.license.expirationDate}"/></td>
-            </tr>
-        </table>
-    </div>
+        </c:forEach>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

@@ -30,22 +30,22 @@ public class DojoController {
             return "dojo/newDojo.jsp";
         } else {
             dojoService.createDojo(dojo);
-            return "redirect:/dojos"; // <---
+            return "redirect:/ninjas/new"; // <---
         }
     }
 
-    @GetMapping("/dojos/{id}")
+    @GetMapping("/{id}")
     public String showDojo(@PathVariable("id") Long id, Model model) {
         Dojo dojo = dojoService.findDojo(id);
         model.addAttribute("dojo", dojo);
-        return "/"; // <---
+        return "dojo/allDojos.jsp"; // <---
     }
 
-    @GetMapping("")
-    public String allDojos(Model model) {
-        List<Dojo> dojos = dojoService.allDojos();
-        model.addAttribute("dojos", dojos);
-        return "dojos/allDojos.jsp";
-    }
+//    @GetMapping("")
+//    public String allDojos(Model model) {
+//        List<Dojo> dojos = dojoService.allDojos();
+//        model.addAttribute("dojos", dojos);
+//        return "dojos/allDojos.jsp";
+//    }
 
 }

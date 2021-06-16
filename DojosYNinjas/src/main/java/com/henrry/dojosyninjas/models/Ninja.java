@@ -1,6 +1,9 @@
 package com.henrry.dojosyninjas.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -9,8 +12,12 @@ public class Ninja {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Size(min=1, max=100)
     private String firstName;
+    @Size(min=1, max=100)
     private String lastName;
+    @Min(1)
+    @Max(110)
     private int age;
     @Column(updatable=false)
     private Date createdAt;
