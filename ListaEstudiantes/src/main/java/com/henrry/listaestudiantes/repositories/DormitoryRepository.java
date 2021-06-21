@@ -1,14 +1,15 @@
 package com.henrry.listaestudiantes.repositories;
 
+import com.henrry.listaestudiantes.models.Dormitory;
 import com.henrry.listaestudiantes.models.Student;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface StudentRepository extends CrudRepository<Student, Long> {
-    List<Student> findAll();
-
+public interface DormitoryRepository extends CrudRepository<Dormitory, Long> {
+    List<Dormitory> findAll();
+    Student findStudentById(Long id);
 }
+

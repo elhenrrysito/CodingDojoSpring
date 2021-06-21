@@ -33,6 +33,9 @@ public class Student {
 
     @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Contact contact;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="dormitory_id")
+    private Dormitory dormitory;
 
     public Student() {
     }
@@ -45,11 +48,12 @@ public class Student {
         this.contact = contact;
     }
 
-    public Student(String firstName, String lastName, int age, Contact contact) {
+    public Student(String firstName, String lastName, int age, Contact contact, Dormitory dormitory) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.contact = contact;
+        this.dormitory = dormitory;
     }
 
     public Student(String firstName, String lastName, int age) {
@@ -113,6 +117,12 @@ public class Student {
     public void setContact(Contact contact) {
         this.contact = contact;
     }
+
+
+    public void setDormitory(Dormitory dormitory) {
+        this.dormitory = dormitory;
+    }
+
 
     @PrePersist
     protected void onCreate() {

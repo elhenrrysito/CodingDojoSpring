@@ -1,13 +1,12 @@
 package com.henrry.listaestudiantes.controllers;
 
 import com.henrry.listaestudiantes.models.Contact;
+import com.henrry.listaestudiantes.models.Dormitory;
 import com.henrry.listaestudiantes.models.Student;
 import com.henrry.listaestudiantes.services.ApiService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -41,6 +40,35 @@ public class ApiController {
         return apiService.createContact(contact);
     }
 
+    @PostMapping("/dorms/create")
+    public Dormitory createDormitory(@RequestParam("name") String name) {
+        Dormitory dormitory = new Dormitory(name);
+        return apiService.createDormitory(dormitory);
+    }
 
+    @GetMapping("/dorms/{id}")
+    public List<Student> showStudentsFromDormitory(@PathVariable("id") Long id) {
+        Dormitory dormitory = apiService.findDormitory(id);
+        return dormitory.getStudents();
+    }
+
+    @PutMapping("/dorms/{id}/add")
+    public Dormitory addStudentDormitory(@PathVariable("id") Long idDormitory, @RequestParam("student") Long idStudent) {
+        Student student = apiService.findStudent(idStudent);
+        Dormitory dormitory = apiService.findDormitory(idDormitory);
+        student.setDormitory(dormitory);
+        return apiService.updateDormitory(dormitory);
+    }
+
+    @DeleteMapping("/dorms/{id}/remove")
+    public void removeStudentDormitory(@PathVariable("id") Long idDormitory, @RequestParam("student") Long idStudent) {
+        apiService.deleteStudentFromDormitory(idStudent, idDormitory);
+//        Dormitory dormitory = apiService.findDormitory(idDormitory);
+//        Student student = apiService.findStudent(idStudent);
+//        List<Student> students = dormitory.getStudents();
+//        apiService.updateDormitory(dormitory);
+//        dormitory.setStudents(students);
+
+    }
 
 }
