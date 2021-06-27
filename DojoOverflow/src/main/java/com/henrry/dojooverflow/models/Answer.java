@@ -1,38 +1,41 @@
-package com.henrry.productoscategorias.models;
+package com.henrry.dojooverflow.models;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
-@Table(name="categories")
-public class Category {
+@Table(name = "answers")
+public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+
+    private String answer;
+
     @Column(updatable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createdAt;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date updatedAt;
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "categories_products",
-            joinColumns = @JoinColumn(name = "category_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    private List<Product> products;
 
-    public Category() {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "question_id")
+    private Question question;
+
+    public Answer() {
     }
 
-    public Category(Long id, String name, List<Product> products) {
+    public Answer(Long id, String answer, Question question) {
         this.id = id;
-        this.name = name;
-        this.products = products;
+        this.answer = answer;
+        this.question = question;
     }
 
-    public Category(String name) {
-        this.name = name;
+    public Answer(String answer, Question question) {
+        this.answer = answer;
+        this.question = question;
     }
 
     public Long getId() {
@@ -43,12 +46,12 @@ public class Category {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getAnswer() {
+        return answer;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 
     public Date getCreatedAt() {
@@ -67,12 +70,12 @@ public class Category {
         this.updatedAt = updatedAt;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public Question getQuestion() {
+        return question;
     }
 
-    public void setProducts(Product product) {
-        this.products.add(product);
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 
     @PrePersist

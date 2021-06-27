@@ -83,8 +83,8 @@ public class Product {
         return categories;
     }
 
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
+    public void setCategories(Category category) {
+        this.categories.add(category);
     }
 
     @PrePersist

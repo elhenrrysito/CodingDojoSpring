@@ -25,12 +25,12 @@ public class ProductController {
     }
 
     @GetMapping("/new")
-    public String newSong(@ModelAttribute("product") Product product) {
+    public String newProduct(@ModelAttribute("product") Product product) {
         return "product/newProduct.jsp";
     }
 
     @PostMapping("/new")
-    public String addSong(@Valid @ModelAttribute("product") Product product, BindingResult result) {
+    public String addProduct(@Valid @ModelAttribute("product") Product product, BindingResult result) {
         if(result.hasErrors()) {
             return "product/newProduct.jsp";
         } else {
@@ -58,7 +58,10 @@ public class ProductController {
             return "product/newProductCategory.jsp";
         } else {
             Product product = productService.findProduct(id);
+//            product.setCategories(categoryProduct.getCategory());
+//            productService.updateProduct(product);
             categoryProduct.setProduct(product);
+            // product.setCategories(category); <-- para agregar sin tabla intermedia
             categoryProductServ.joinCategoryProduct(categoryProduct);
             return "redirect:/";
         }

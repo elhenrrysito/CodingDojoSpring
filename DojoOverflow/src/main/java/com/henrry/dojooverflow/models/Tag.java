@@ -1,38 +1,39 @@
-package com.henrry.productoscategorias.models;
+package com.henrry.dojooverflow.models;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name="categories")
-public class Category {
+@Table(name = "tags")
+public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+
+    private String subject;
+
     @Column(updatable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createdAt;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date updatedAt;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "categories_products",
-            joinColumns = @JoinColumn(name = "category_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
+            name = "tags_questions",
+            joinColumns = @JoinColumn(name = "tag_id"),
+            inverseJoinColumns = @JoinColumn(name="question_id")
     )
-    private List<Product> products;
+    private List<Question> questions;
 
-    public Category() {
+    public Tag() {
     }
 
-    public Category(Long id, String name, List<Product> products) {
-        this.id = id;
-        this.name = name;
-        this.products = products;
-    }
-
-    public Category(String name) {
-        this.name = name;
+    public Tag(String subject) {
+        this.subject = subject;
     }
 
     public Long getId() {
@@ -43,12 +44,12 @@ public class Category {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getSubject() {
+        return subject;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
     public Date getCreatedAt() {
@@ -67,12 +68,12 @@ public class Category {
         this.updatedAt = updatedAt;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public List<Question> getQuestions() {
+        return questions;
     }
 
-    public void setProducts(Product product) {
-        this.products.add(product);
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 
     @PrePersist
