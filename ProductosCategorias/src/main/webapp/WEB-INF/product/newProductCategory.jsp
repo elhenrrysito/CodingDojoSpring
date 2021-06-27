@@ -30,8 +30,8 @@
                 <form:form action="/products/${product.id}" method="post" modelAttribute="categoryProduct">
                     <form:label path="category">Add Category:</form:label>
                     <form:select path="category">
-                        <c:forEach var="categories" items="${categories}">
-                            <form:option value="${categories.id}">${categories.name}</form:option>
+                        <c:forEach var="categoria" items="${categories}">
+                            <form:option value="${categoria.id}">${categoria.name}</form:option>
                         </c:forEach>
                     </form:select>
                     <input type="submit" class="btn btn-primary" value="Add">

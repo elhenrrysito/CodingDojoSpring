@@ -50,17 +50,17 @@ public class CategoryController {
         return "category/newCategoryProduct.jsp";
     }
 
-    @PostMapping("/{id}")
-    public String addProductToCategory(@PathVariable("id") Long id,
+    @PostMapping("/{idCategory}")
+    public String addProductToCategory(@PathVariable("idCategory") Long idCategory,
                                        @ModelAttribute("categoryProduct") CategoryProduct categoryProduct,
                                        BindingResult result) {
         if(result.hasErrors()) {
             return "category/newCategoryProduct.jsp";
         } else {
-            Category category = categoryService.findCategory(id);
+            Category category = categoryService.findCategory(idCategory);
             categoryProduct.setCategory(category);
             categoryProductServ.joinCategoryProduct(categoryProduct);
-            return "redirect:/";
+            return "redirect:/categories/" + idCategory;
         }
     }
 }

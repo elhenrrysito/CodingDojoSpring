@@ -50,20 +50,20 @@ public class ProductController {
         return "product/newProductCategory.jsp";
     }
 
-    @PostMapping("/{id}")
-    public String addCategoryToProduct(@PathVariable("id") Long id,
+    @PostMapping("/{idProduct}")
+    public String addCategoryToProduct(@PathVariable("idProduct") Long idProduct,
                                        @ModelAttribute("categoryProduct") CategoryProduct categoryProduct,
                                        BindingResult result) {
         if(result.hasErrors()) {
             return "product/newProductCategory.jsp";
         } else {
-            Product product = productService.findProduct(id);
+            Product product = productService.findProduct(idProduct);
 //            product.setCategories(categoryProduct.getCategory());
 //            productService.updateProduct(product);
             categoryProduct.setProduct(product);
             // product.setCategories(category); <-- para agregar sin tabla intermedia
             categoryProductServ.joinCategoryProduct(categoryProduct);
-            return "redirect:/";
+            return "redirect:/products/" + idProduct;
         }
     }
 

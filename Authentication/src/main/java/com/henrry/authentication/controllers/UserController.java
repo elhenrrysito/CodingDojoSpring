@@ -2,6 +2,7 @@ package com.henrry.authentication.controllers;
 
 import com.henrry.authentication.models.User;
 import com.henrry.authentication.services.UserService;
+import com.henrry.authentication.validator.UserValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,9 +17,11 @@ import javax.validation.Valid;
 @Controller
 public class UserController {
     private final UserService userService;
+    private final UserValidator userValidator;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UserValidator userValidator) {
         this.userService = userService;
+        this.userValidator = userValidator;
     }
 
     @GetMapping("/registration")
@@ -32,13 +35,14 @@ public class UserController {
 
     @PostMapping("/registration")
     public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult result, HttpSession session) {
+        userValidator.validate(user, result);
         if(result.hasErrors()) {
             return "users/registrationPage.jsp";
-        } else {
-            User u = userService.registerUser(user);
-            session.setAttribute("idUser", u.getId());
-            return "redirect:/home";
         }
+        User u = userService.registerUser(user);
+        session.setAttribute("idUser", u.getId());
+        return "redirect:/home";
+
         //si el resultado tiene errores, retornar a la página de registro (no se preocupe por las validaciones por ahora)
         //si no, guarde el usuario en la base de datos, guarde el id del usuario en el objeto Session y redirija a /home
     }
