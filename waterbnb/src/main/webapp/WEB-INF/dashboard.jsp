@@ -1,0 +1,68 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: henrr
+  Date: 06/07/2021
+  Time: 17:42
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Dashboard</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1>Current Listings</h1>
+            <table>
+                <thead>
+                    <th>Address</th>
+                    <th>Pool Size</th>
+                    <th>Cost per Night</th>
+                    <th>Details</th>
+                </thead>
+                <tbody>
+                    <c:forEach var="poolbnb" items="${user.pools}">
+                        <tr>
+                            <td><c:out value="${poolbnb.address}"/></td>
+                            <td><c:out value="${poolbnb.size}"/></td>
+                            <td><c:out value="${poolbnb.cost}"/></td>
+                            <td><c:out value="${poolbnb.description}"/><a href="/pools/${poolbnb.id}">Edit</a></td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
+        <div class="row mt-3">
+            <h1>New Listing</h1>
+            <form:form action="" method="post" modelAttribute="pool">
+                <div class="col-3">
+                    <form:label cssClass="form-label" path="address">Address:</form:label>
+                    <form:input cssClass="form-control" path="address"/>
+                </div>
+                <div class="col-3">
+                    <form:label cssClass="form-label" path="description">Description:</form:label>
+                    <form:input cssClass="form-control" path="description"/>
+                </div>
+                <div class="col-3">
+                    <form:label cssClass="form-label" path="cost">Cost:</form:label>
+                    <form:input cssClass="form-control" type="number" path="cost"/>
+                </div>
+                <div class="col-3">
+                    <form:select path="size" cssClass="form-select mt-3">
+                        <form:option value="small">Small</form:option>
+                        <form:option value="medium">Medium</form:option>
+                        <form:option value="large">Large</form:option>
+                    </form:select>
+                </div>
+                <div class="col-3 mt-4">
+                    <input class="btn btn-primary" type="submit" value="Add Listing"/>
+                </div>
+            </form:form>
+        </div>
+    </div>
+</body>
+</html>
