@@ -15,10 +15,13 @@
 </head>
 <body>
     <div class="container">
+        <div class="d-flex justify-content-end">
+            <a href="/logout" class="btn btn-primary mt-3">Logout</a>
+        </div>
         <div class="row">
             <h1>Current Listings</h1>
-            <table>
-                <thead>
+            <table class="table mt-3">
+                <thead class="table-dark">
                     <th>Address</th>
                     <th>Pool Size</th>
                     <th>Cost per Night</th>
@@ -30,7 +33,7 @@
                             <td><c:out value="${poolbnb.address}"/></td>
                             <td><c:out value="${poolbnb.size}"/></td>
                             <td><c:out value="${poolbnb.cost}"/></td>
-                            <td><c:out value="${poolbnb.description}"/><a href="/pools/${poolbnb.id}">Edit</a></td>
+                            <td><a href="/host/pools/${poolbnb.id}"><c:out value="${poolbnb.averageRating()}"/>/5 - Edit</a></td>
                         </tr>
                     </c:forEach>
                 </tbody>
@@ -42,14 +45,17 @@
                 <div class="col-3">
                     <form:label cssClass="form-label" path="address">Address:</form:label>
                     <form:input cssClass="form-control" path="address"/>
+                    <form:errors path="address"/>
                 </div>
                 <div class="col-3">
                     <form:label cssClass="form-label" path="description">Description:</form:label>
                     <form:input cssClass="form-control" path="description"/>
+                    <form:errors path="description"/>
                 </div>
                 <div class="col-3">
                     <form:label cssClass="form-label" path="cost">Cost:</form:label>
                     <form:input cssClass="form-control" type="number" path="cost"/>
+                    <form:errors path="cost"/>
                 </div>
                 <div class="col-3">
                     <form:select path="size" cssClass="form-select mt-3">

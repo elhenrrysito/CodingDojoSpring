@@ -29,15 +29,13 @@ public class UserController {
         if(session.getAttribute("userId") == null) {
             return "users/registrationLogin.jsp";
         } else {
-            return "redirect:/dashboard";
+            return "redirect:/host/dashboard";
         }
     }
 
     @PostMapping("/register")
     public String registerAndLogin(@Valid @ModelAttribute("user") User user, BindingResult result, HttpSession session, Model model) {
         userValidator.validate(user, result);
-        System.out.println(user.getFirstName());
-        System.out.println(user.getLastName());
         if(result.hasErrors()) {
             return "users/registrationLogin.jsp";
         } else {

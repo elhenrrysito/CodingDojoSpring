@@ -17,6 +17,10 @@ public class PoolService extends BaseService<Pool> {
         this.poolRepository = baseRepository;
     }
 
+    public List<Pool> poolByAddress(String address) {
+        return poolRepository.findByAddressContaining(address);
+    }
+
 //    public List<Pool> allUserPools(User host) {
 //        System.out.println(host.getFirstName());
 //        return poolRepository.findByHostsContains(host);

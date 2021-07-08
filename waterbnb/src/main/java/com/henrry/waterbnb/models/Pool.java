@@ -4,10 +4,16 @@ package com.henrry.waterbnb.models;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.List;
 
 @Entity
 @Table(name = "pools")
+@Getter @Setter @NoArgsConstructor
 public class Pool extends BaseModel {
     @Size(min = 5, message = "Dirección debe tener más de 5 caracteres")
     private String address;
@@ -23,71 +29,20 @@ public class Pool extends BaseModel {
     @OneToMany(mappedBy = "pool", fetch = FetchType.LAZY)
     private List<Review> reviews;
 
-    public Pool() {
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-
-
-    public String getDescription() {
-        return description;
-    }
-
-
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-
-
-    public String getSize() {
-        return size;
-    }
-
-
-
-    public void setSize(String size) {
-        this.size = size;
-    }
-
-
-
-    public double getCost() {
-        return cost;
-    }
-
-
-
-    public void setCost(double cost) {
-        this.cost = cost;
-    }
-
-
-
-    public User getHost() {
-        return host;
-    }
-
-
-
-    public void setHost(User host) {
-        this.host = host;
-    }
-
-
-
     public void setReview(Review review) {
         this.reviews.add(review);
+    }
+
+    // metodos
+
+
+    public float averageRating() {
+        int suma = 0;
+        for(int i = 0; i < reviews.size(); i++) {
+            suma+=reviews.get(i).getRating();
+        }
+
+        return suma/reviews.size();
     }
 }
 
